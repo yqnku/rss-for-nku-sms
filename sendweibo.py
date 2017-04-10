@@ -11,11 +11,16 @@
 from weibo import Client
 import time
 
-api_key = #你的应用Key
-api_secret = #你的应用Secret
-redirect_url = #你的应用回调地址
-name = #你的微博用户名
-pwd = #你的微博密码
+#你的应用Key
+#api_key = 
+#你的应用Secret
+#api_secret = 
+#你的应用回调地址
+#redirect_url = 
+#你的微博用户名
+#name = 
+#你的微博密码
+#pwd = 
 
 #发送微博
 def sendsweibo(messages):

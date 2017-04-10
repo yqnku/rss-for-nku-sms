@@ -16,16 +16,20 @@ import time
 
 url = 'http://sms.nankai.edu.cn'
 links = [
-    '/html/xwzx/xyxw', #学院新闻
-    '/html/bksjx/all', #本科生教育
-    '/html/yjsjx/all', #研究生教育
-    '/html/kydt/all',  #科研动态
-    '/html/xsgz/all',  #学生工作
-    '/html/zsxx/all',  #公共数学
+    '/5547/list.htm', #学院新闻
+    '/5536/list.htm', #本科生教育
+    '/5537/list.htm', #研究生教育
+    '/5538/list.htm',  #科研动态
+    '/5540/list.htm',  #学生工作
+    '/5539/list.htm',  #公共数学
 ]
+result_re=re.compile("<li><a href='(.+?)' target='_blank' title='(.+?)'>(.+?)</a><span>(.+?)</span></li>")
 
-LatestFilePath = #本地更新保存地址
-RSSPath = #rss保存地址
+#本地更新保存地址
+#LatestFilePath = 
+
+#rss保存地址
+#RSSPath = 
 
 #测试网络是否可用,并判断是否是502页面
 def testNet():
@@ -40,7 +44,6 @@ def testNet():
 
 #获取页面上的名称，超链接和时间内容
 def getContent(page):
-    result_re=re.compile('<li><a target="_blank" href="(.+?)">(.+?)</a><span>(.+?)</span></li>')
     result=result_re.findall(page)
     return result
 
