@@ -13,9 +13,11 @@ import re
 import xml.etree.ElementTree as ET
 from traceback import format_tb
 import time
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-url = 'http://sms.nankai.edu.cn'
-links = [
+URL = 'http://sms.nankai.edu.cn'
+LINKS = [
     '/5547/list.htm', #学院新闻
     '/5536/list.htm', #本科生教育
     '/5537/list.htm', #研究生教育
@@ -23,18 +25,18 @@ links = [
     '/5540/list.htm',  #学生工作
     '/5539/list.htm',  #公共数学
 ]
-result_re=re.compile("<li><a href='(.+?)' target='_blank' title='(.+?)'>(.+?)</a><span>(.+?)</span></li>")
+RESULT_RE = re.compile("<li><a href='(.+?)' target='_blank' title='(.+?)'>(.+?)</a><span>(.+?)</span></li>")
 
 #本地更新保存地址
-LatestFilePath = ""
+LATEST_FILE_PATH = os.path.join(BASE_DIR,'config')
 
 #rss保存地址
-RSSPath = ""
+RSS_PATH = os.path.join(BASE_DIR,'rss')
 
 #测试网络是否可用,并判断是否是502页面
 def testNet():
     try:
-        conn = requests.get(url)
+        conn = requests.get(URL)
         content = conn.text
         if (content.find('502 Bad Gateway') != -1):
             return False
@@ -44,15 +46,15 @@ def testNet():
 
 #获取页面上的名称，超链接和时间内容
 def getContent(page):
-    result=result_re.findall(page)
+    result = RESULT_RE.findall(page)
     return result
 
 #将获取到的内容放到一个表里
 def getContentTable():
     table = []
-    for link in links:
+    for link in LINKS:
         try:
-            conn = requests.get(url + link)
+            conn = requests.get(URL + link)
             content = conn.text 
             table.append(getContent(content))
         except Exception as exc:
@@ -68,7 +70,7 @@ def getNowLatest(table):
 
 #获得本地上最新的内容
 def getLocalLatest():
-    localLatest = open(LatestFilePath,'r')
+    localLatest = open(LATEST_FILE_PATH,'r')
     localLatests = localLatest.readlines()
     localLatest.close()
     return localLatests
@@ -118,7 +120,7 @@ def createElem(title,link,date):
 #更新XML文件
 def updateXML(table,local):
     files = ['xyxw.xml','bksjw.xml','yjsjw.xml','kydt.xml','xsgz.xml','ggsx.xml']
-    files = [RSSPath+i for i in files]
+    files = [RSS_PATH+i for i in files]
     length = len(files)
     update = getUpdate(table,local)
     for i in range(length):
@@ -127,12 +129,12 @@ def updateXML(table,local):
         channel = root.getchildren()[0]
         if update[i] != []:
             for item in update[i]:
-                channel.insert(3,createElem(item[1],url + item[0],item[2]))
+                channel.insert(3,createElem(item[1],URL + item[0],item[2]))
         tree.write(files[i])
 
 #更新latest文件
 def updateLatest(table):
-    f = open(LatestFilePath,'w')
+    f = open(LATEST_FILE_PATH,'w')
     latest = getNowLatest(table)
     for l in latest:
         f.write(l+'\n')
