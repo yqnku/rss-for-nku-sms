@@ -10,13 +10,13 @@ import time
 from traceback import format_tb
 
 #你的电子邮件地址
-#From = 
+From = ""
 #你的密码
-#pwd = 
+pwd = ""
 #SMTP地址
-#smtp_server = 
+smtp_server = ""
 #端口
-#port = 
+port = ""
 
 #编码发件人信息
 def _format_addr(s):

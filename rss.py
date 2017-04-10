@@ -26,10 +26,10 @@ links = [
 result_re=re.compile("<li><a href='(.+?)' target='_blank' title='(.+?)'>(.+?)</a><span>(.+?)</span></li>")
 
 #本地更新保存地址
-#LatestFilePath = 
+LatestFilePath = ""
 
 #rss保存地址
-#RSSPath = 
+RSSPath = ""
 
 #测试网络是否可用,并判断是否是502页面
 def testNet():
