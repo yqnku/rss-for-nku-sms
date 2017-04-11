@@ -68,8 +68,8 @@ if __name__ == '__main__':
             if not isUpdated(table,local):
                 updateXML(table,local)
                 updateLatest(table)
-                sendWeibo(table,local)
-                sendMail(table,local)
+                #sendWeibo(table,local)
+                #sendMail(table,local)
                 print("updated!")
             else:
                 print("no update!")

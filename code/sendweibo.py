@@ -8,7 +8,7 @@
 # Created Time: 2016-08-04 13:51:41
 #************************************************************************
 
-from weibo import Client
+from .weibo import Client
 import time
 import sys
 sys.path.append("..")

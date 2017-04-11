@@ -104,18 +104,16 @@ def createElem(title,link,date):
 
 #更新XML文件
 def updateXML(table,local):
-    files = ['xyxw.xml','bksjw.xml','yjsjw.xml','kydt.xml','xsgz.xml','ggsx.xml']
-    files = [RSS_PATH+i for i in files]
-    length = len(files)
+    length = len(RSS_FILES)
     update = getUpdate(table,local)
     for i in range(length):
-        tree = ET.parse(files[i])
+        tree = ET.parse(RSS_FILES[i])
         root = tree.getroot()
         channel = root.getchildren()[0]
         if update[i] != []:
             for item in update[i]:
                 channel.insert(3,createElem(item[1],URL + item[0],item[2]))
-        tree.write(files[i])
+        tree.write(RSS_FILES[i])
 
 #更新latest文件
 def updateLatest(table):

@@ -27,10 +27,13 @@ LINKS = [
 RESULT_RE = re.compile("<li><a href='(.+?)' target='_blank' title='(.+?)'>(.+?)</a><span>(.+?)</span></li>")
 
 #本地更新保存地址
-LATEST_FILE_PATH = os.path.join(BASE_DIR,'config')
+LATEST_FILE_PATH = os.path.join(BASE_DIR,'config/latest')
 
-#rss保存地址
+#rss,xml文件保存地址
 RSS_PATH = os.path.join(BASE_DIR,'rss')
+
+RSS_FILES = ['/xyxw.xml','/bksjy.xml','/yjsjy.xml','/kydt.xml','/xsgz.xml','/ggsx.xml']
+RSS_FILES = [RSS_PATH+i for i in RSS_FILES]
 
 ##邮件
 #你的电子邮件地址
