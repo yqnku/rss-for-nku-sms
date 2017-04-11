@@ -13,25 +13,10 @@ import re
 import xml.etree.ElementTree as ET
 from traceback import format_tb
 import time
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import sys
+sys.path.append("..")
+from config.config import *
 
-URL = 'http://sms.nankai.edu.cn'
-LINKS = [
-    '/5547/list.htm', #学院新闻
-    '/5536/list.htm', #本科生教育
-    '/5537/list.htm', #研究生教育
-    '/5538/list.htm',  #科研动态
-    '/5540/list.htm',  #学生工作
-    '/5539/list.htm',  #公共数学
-]
-RESULT_RE = re.compile("<li><a href='(.+?)' target='_blank' title='(.+?)'>(.+?)</a><span>(.+?)</span></li>")
-
-#本地更新保存地址
-LATEST_FILE_PATH = os.path.join(BASE_DIR,'config')
-
-#rss保存地址
-RSS_PATH = os.path.join(BASE_DIR,'rss')
 
 #测试网络是否可用,并判断是否是502页面
 def testNet():

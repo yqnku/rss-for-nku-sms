@@ -8,12 +8,12 @@
 # Created Time: 2016-08-08 15:07:26
 #************************************************************************
 
-from rss import *
-from mail import *
-from sendweibo import *
+from code.rss import *
+from code.mail import *
+from code.sendweibo import *
 from traceback import format_tb
+from config.config import *
 
-ReceiverPath = #你的收件人文件地址
 
 #构造邮件发送信息
 def makeMessage(table,local):

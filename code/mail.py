@@ -8,15 +8,10 @@ from email.utils import parseaddr, formataddr
 import smtplib
 import time
 from traceback import format_tb
+import sys
+sys.path.append("..")
+from config.config import *
 
-#你的电子邮件地址
-From = ""
-#你的密码
-pwd = ""
-#SMTP地址
-smtp_server = ""
-#端口
-port = ""
 
 #编码发件人信息
 def _format_addr(s):
